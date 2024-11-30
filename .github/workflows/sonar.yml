@@ -1,12 +1,12 @@
-name: SonarQube Analysis
+name: SonarQube Analysis with Tests
 
 on:
   push:
     branches:
-      - main  # Trigger on push to the main branch
+      - main 
   pull_request:
     branches:
-      - main  # Trigger on PR targeting the main branch
+      - main  
 
 jobs:
   sonar:
@@ -20,14 +20,18 @@ jobs:
     - name: Set up Python
       uses: actions/setup-python@v2
       with:
-        python-version: '3.8'  # You can choose a different Python version
+        python-version: '3.8' 
 
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install -r requirements.txt  # Make sure your dependencies are listed in requirements.txt
+        pip install -r requirements.txt 
 
     - name: SonarQube Scan
       uses: sonarsource/sonarcloud-github-action@v1
       with:
-        sonarcloud-token: ${{ secrets.SONAR_TOKEN }}  # Use the token you created in SonarQube Cloud
+        sonarcloud-token: ${{ secrets.S }}  
+    - name: Run tests
+        run: |
+          pytest test_app.py
+  
