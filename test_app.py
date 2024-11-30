@@ -1,5 +1,5 @@
-# test_app.py
 import pytest
+import math
 from app import add_numbers, subtract_numbers, multiply_numbers, divide_numbers
 
 def test_add_numbers():
@@ -18,9 +18,8 @@ def test_multiply_numbers():
     assert multiply_numbers(-1, 2) == -2
 
 def test_divide_numbers():
-    assert divide_numbers(6, 3) == 2
-    assert divide_numbers(7, 2) == 3.5
+    assert math.isclose(divide_numbers(6, 3), 2)
+    assert math.isclose(divide_numbers(7, 2), 3.5)
     # Testing divide by zero should raise ValueError
     with pytest.raises(ValueError):
         divide_numbers(1, 0)
-
