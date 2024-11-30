@@ -39,6 +39,19 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_SCANNER_TOKEN }}
+    - name: Install Snyk CLI
+      run: |
+        npm install -g snyk
+    - name: Test for vulnerabilities with Snyk
+      run: |
+        snyk test
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+    - name: Snyk Monitor
+      run: |
+        snyk monitor
+      env:
+        SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
 
   
