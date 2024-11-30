@@ -1,4 +1,4 @@
-name: SonarQube Analysis with Tests
+name: SonarQube Analysis with Tests and Security Scanning
 
 on:
   push:
@@ -34,11 +34,12 @@ jobs:
     - name: Run SonarQube analysis
       uses: SonarSource/sonarcloud-github-action@v1
       with:
-        organization: your-sonarcloud-organization  # Add your SonarCloud organization
-        projectKey: python-devops-pipeline
-        projectName: Python DevOps Pipeline
+        entryPoint: ./gradlew  # Use this if you're working with Gradle or adjust as needed
+        args: -Dsonar.projectKey=python-devops-pipeline
+              -Dsonar.projectName=Python DevOps Pipeline
+              -Dsonar.sources=.
       env:
-        SONAR_TOKEN: ${{ secrets.SONAR_SCANNER_TOKEN }}  # Set your SonarQube token in GitHub secrets
+        SONAR_TOKEN: ${{ secrets.SONAR_SCANNER_TOKEN }}  # Use your SonarQube token
 
     - name: Install Snyk CLI
       run: |
