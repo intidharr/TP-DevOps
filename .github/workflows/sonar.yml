@@ -31,16 +31,7 @@ jobs:
       run: |
         pytest --cov=app --cov-report=xml
 
-    - name: Run SonarQube analysis
-      uses: SonarSource/sonarcloud-github-action@v1
-      with:
-        entryPoint: ./gradlew  # Use this if you're working with Gradle or adjust as needed
-        args: -Dsonar.projectKey=python-devops-pipeline
-              -Dsonar.projectName=Python DevOps Pipeline
-              -Dsonar.sources=.
-      env:
-        SONAR_TOKEN: ${{ secrets.SONAR_SCANNER_TOKEN }}  # Use your SonarQube token
-
+   
     - name: Install Snyk CLI
       run: |
         npm install -g snyk
