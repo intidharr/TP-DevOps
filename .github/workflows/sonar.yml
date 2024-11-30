@@ -34,4 +34,19 @@ jobs:
     - name: Run tests
         run: |
           pytest test_app.py
+    - name: SonarQube Scanner
+      env:
+        SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}  
+      run: |
+        # Install SonarScanner
+        wget https://github.com/SonarSource/sonar-scanner-cli/releases/download/4.7.0.2747/sonar-scanner-4.7.0.2747-linux.zip
+        unzip sonar-scanner-4.7.0.2747-linux.zip
+        export PATH=$PWD/sonar-scanner-4.7.0.2747-linux/bin:$PATH
+        
+        # Run the SonarQube scanner with the appropriate arguments
+        sonar-scanner \
+          -Dsonar.projectKey=python-devops-pipeline \
+          -Dsonar.sources=. \
+          -Dsonar.host.url=https://sonarcloud.io \
+          -Dsonar.login=${{ secrets.SONAR_TOKEN }
   
