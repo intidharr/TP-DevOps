@@ -19,7 +19,9 @@ def test_multiply_numbers():
 
 def test_divide_numbers():
     assert math.isclose(divide_numbers(6, 3), 2)
-    assert math.isclose(divide_numbers(7, 2), 3.5)
+    #assert math.isclose(divide_numbers(7, 2), 3.5)
+    assert divide_numbers(7, 2)==3.5
+    
     # Testing divide by zero should raise ValueError
     with pytest.raises(ValueError):
         divide_numbers(1, 0)
